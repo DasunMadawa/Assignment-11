@@ -6,10 +6,10 @@ const cId_reg = /^C\d{3}$/;
 
 var row_index = -1;
 
-customers.push(new CustomerModel("C001", "Dasun Madawa", "Horana", 150000));
-customers.push(new CustomerModel("C002", "Dasun Madawa", "Horana", 150000));
-customers.push(new CustomerModel("C003", "Dasun Madawa", "Horana", 150000));
-customers.push(new CustomerModel("C004", "Dasun Madawa", "Horana", 150000));
+// customers.push(new CustomerModel("C001", "Dasun Madawa", "Horana", 150000));
+// customers.push(new CustomerModel("C002", "Dasun Madawa", "Horana", 150000));
+// customers.push(new CustomerModel("C003", "Dasun Madawa", "Horana", 150000));
+// customers.push(new CustomerModel("C004", "Dasun Madawa", "Horana", 150000));
 
 let idInput = $(" #c_c_id ");
 let nameInput = $(" #c_c_name ");

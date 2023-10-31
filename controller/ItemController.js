@@ -3,8 +3,8 @@ import {ItemModel} from "../model/ItemModel.js";
 
 var row_index = -1;
 
-items.push(new ItemModel("01" , "Shampoo" , 150 , 23));
-items.push(new ItemModel("02" , "Fresh Milk" , 350 , 15));
+// items.push(new ItemModel("01" , "Shampoo" , 150 , 23));
+// items.push(new ItemModel("02" , "Fresh Milk" , 350 , 15));
 
 let codeInput = $("#i_i_code");
 let nameInput = $("#i_i_name");
