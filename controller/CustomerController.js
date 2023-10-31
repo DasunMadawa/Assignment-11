@@ -1,6 +1,9 @@
 import {customers, items} from "../db/DB.js";
 import {CustomerModel} from "../model/CustomerModel.js";
 
+const name_reg = /^[A-Za-z\s\-']{1,50}$/;
+const cId_reg = /^C\d{3}$/;
+
 var row_index = -1;
 
 customers.push(new CustomerModel("C001", "Dasun Madawa", "Horana", 150000));
@@ -12,6 +15,7 @@ let idInput = $(" #c_c_id ");
 let nameInput = $(" #c_c_name ");
 let addressInput = $(" #c_c_address ");
 let salaryInput = $(" #c_c_salary ");
+
 
 // load all data to table
 const loadAllTableData = () => {
@@ -66,9 +70,46 @@ $(" #c_table ").on('click', 'tr ', function() {
 
 // save
 $("#c_save").on('click' , () => {
-    customers.push(new CustomerModel( $("#c_c_id").val() , $("#c_c_name").val() , $("#c_c_address").val() , $("#c_c_salary").val() ) );
+    if (!idInput || !cId_reg.test(idInput.val())){
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Fill Customer Id Correctly !'
+        });
+        return;
+    }
+
+    if (!nameInput){
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Fill Customer Name Correctly !'
+        });
+        return;
+    }
+
+    if (!addressInput){
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Fill Customer Address Correctly !'
+        });
+        return;
+    }
+
+    if (!salaryInput){
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Fill Customer Salary Correctly !'
+        });
+        return;
+    }
+
+    customers.push(new CustomerModel( idInput.val() , nameInput.val() , addressInput.val() , salaryInput.val() ) );
     loadAllTableData();
     clear();
+
 });
 
 // update
