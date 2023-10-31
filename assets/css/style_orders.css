@@ -57,6 +57,14 @@ tr > td {
     background-color: #006b4d;
 }
 
+@media all and (max-width: 450px){
+    .remove-t-btn {
+        font-size: 10px;
+        padding: 2px;
+        width: fit-content;
+    }
+
+}
 
 
 

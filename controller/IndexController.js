@@ -1,7 +1,4 @@
-import {loadCustomers} from "../controller/OrderController.js";
-import {loadItems} from "../controller/OrderController.js";
-
-console.log("hello")
+import {init} from "./OrderController.js";
 
 let home = $(" body > div:nth-child(2) ");
 let customers = $(" body > div:nth-child(3) ");
@@ -36,8 +33,7 @@ $("#items_page").on('click' , () => {
 $("#orders_page").on('click' , () => {
     clear();
     orders.css("display" , "block");
-    loadCustomers();
-    loadItems();
+    init();
 
 });
 

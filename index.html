@@ -36,7 +36,7 @@
                     <a id="customers_page" class="nav-link nav_items" href="#">Customers</a>
                 </li>
                 <li class="nav-item nav_items">
-                    <a id="items_page" class="nav-link nav_items" href="#">items</a>
+                    <a id="items_page" class="nav-link nav_items" href="#">Items</a>
                 </li>
                 <li class="nav-item nav_items">
                     <a id="orders_page" class="nav-link nav_items" href="#">Orders</a>
@@ -275,9 +275,9 @@
                                 <label for="customer">Choose a Customer</label>
                                 <select class="form-select" aria-label="Default select example" id="customer">
                                     <option value="none">none</option>
-<!--                                    <option value="C001">C001</option>-->
-<!--                                    <option value="C002">C002</option>-->
-<!--                                    <option value="C001">C003</option>-->
+                                    <!--                                    <option value="C001">C001</option>-->
+                                    <!--                                    <option value="C002">C002</option>-->
+                                    <!--                                    <option value="C001">C003</option>-->
                                 </select>
                             </div>
                             <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
@@ -310,9 +310,9 @@
                         <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
                             <label for="item">Choose a Item:</label>
                             <select class="form-select" aria-label="Default select example" id="item">
-                                <option value="C001">C001</option>
-                                <option value="C002">C002</option>
-                                <option value="C001">C003</option>
+                                <!--                                <option value="C001">C001</option>-->
+                                <!--                                <option value="C002">C002</option>-->
+                                <!--                                <option value="C001">C003</option>-->
                             </select>
                         </div>
                         <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
@@ -336,7 +336,7 @@
                                    placeholder="">
                         </div>
 
-                        <button type="button"
+                        <button id="o-add-item-btn" type="button"
                                 class="col col-4 col-sm4 col-md-4 col-lg-4 col-xl-4 col-xxl-6 btn btn-primary add_item_btn">
                             Add new
                         </button>
@@ -348,8 +348,8 @@
             <!--            total   -->
             <div class="col col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
                 <div class="order_card">
-                    <h4 class="col col-10">Total : 0/=</h4>
-                    <h4 class="col col-10">Sub Total : 0/=</h4>
+                    <h4 id="total" class="col col-10">Total : 0/=</h4>
+                    <h4 id="sub-total" class="col col-10">Sub Total : 0/=</h4>
                     <div class="row">
                         <div class="col col-5 col-sm-5 col-md-5 col-lg-8 col-xl-8 col-xxl-8 mb-3">
                             <label for="cash" class="form-label">Cash</label>
@@ -359,14 +359,14 @@
                         <div class="col col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4 col-xxl-4 mb-3">
                             <label for="discount" class="form-label">Discount</label>
                             <input type="text" class="form-control" id="discount"
-                                   placeholder="">
+                                   placeholder="  %">
                         </div>
                         <div class="col col-5 col-sm-5 col-md-5 col-lg-12 col-xl-12 col-xxl-12 mb-3">
-                            <label for="balance" class="form-label">Discount</label>
+                            <label for="balance" class="form-label">Balance</label>
                             <input type="text" class="form-control" id="balance"
                                    placeholder="">
                         </div>
-                        <button type="button"
+                        <button id="purchase_btn" type="button"
                                 class="col col-4 col-sm4 col-md-4 col-lg-4 col-xl-4 col-xxl-4 btn btn-primary purchase_btn">
                             Purchase
                         </button>
@@ -387,69 +387,26 @@
                     <th>Name</th>
                     <th>Price</th>
                     <th>Qty</th>
+                    <th>Action</th>
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td>01</td>
-                        <td>Shampoo</td>
-                        <td>150</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>Shampoo</td>
-                        <td>150</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>Shampoo</td>
-                        <td>150</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>Shampoo</td>
-                        <td>150</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>Shampoo</td>
-                        <td>150</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>Shampoo</td>
-                        <td>150</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>Shampoo</td>
-                        <td>150</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>Shampoo</td>
-                        <td>150</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>Shampoo</td>
-                        <td>150</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>01</td>
-                        <td>Shampoo</td>
-                        <td>150</td>
-                        <td>23</td>
-                    </tr>
+<!--                    <tr>-->
+<!--                        <td>01</td>-->
+<!--                        <td>Shampoo</td>-->
+<!--                        <td>150</td>-->
+<!--                        <td>23</td>-->
+<!--                        <td>-->
+<!--                            <div class="container">-->
+<!--                                <div style="justify-content: center" class="row">-->
+<!--                                    <button type="button"-->
+<!--                                            class="col col-12 col-sm12 col-md-8 col-lg-8 col-xl-4 col-xxl-4 btn btn-danger remove-t-btn">-->
+<!--                                        Remove-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
 
                     </tbody>
 

@@ -85,13 +85,14 @@ $(" #c_update ").on('click' , () => {
 
 // delete
 $(" #c_delete ").on('click' , () => {
-    if (!row_index >= 0 ){
+    if (row_index === -1 ){
         alert("Select or search customer !");
         return;
     }
 
     customers.splice(row_index , 1);
     loadAllTableData();
+    clear();
     row_index = -1;
 });
 

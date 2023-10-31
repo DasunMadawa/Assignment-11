@@ -72,13 +72,14 @@ $("#i_update_btn").on('click', () => {
 
 // delete
 $("#i_delete_btn").on('click', () => {
-    if (row_index == -1) {
+    if (row_index === -1) {
         alert("Select or search Customer.");
         return;
     }
 
     items.splice(row_index, 1);
     loadAllTableData();
+    clear();
     row_index = -1;
 
 });

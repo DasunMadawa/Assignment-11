@@ -12,6 +12,11 @@ h4 {
     font-weight: 500;
 }
 
+label {
+    margin-bottom: 8px;
+
+}
+
 body > .nav_bar {
     width: 100%;
     position: fixed;
@@ -150,7 +155,12 @@ body > .nav_bar {
     /*width: calc(100% - 10px);*/
 }
 
+@media all and (max-width: 450px){
+    .table {
+        font-size: 10px;
+    }
 
+}
 
 
 
