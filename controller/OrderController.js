@@ -1,6 +1,4 @@
-import {items} from "../db/DB.js";
-import {customers} from "../db/DB.js";
-import {orders} from "../db/DB.js";
+import {items , customers , orders } from "../db/DB.js";
 import {OrderModel} from "../model/OrderModel.js";
 import {CustomerModel} from "../model/CustomerModel.js";
 import {ItemModel} from "../model/ItemModel.js";
@@ -20,23 +18,22 @@ let total = 0;
 let subTotal = 0;
 let orderItems = [];
 
-
 // set fields uneditable
-function fieldsLock() {
-    $("#c_name").attr("readonly", true);
-    $("#c_address").attr("readonly", true);
-    $("#c_salary").attr("readonly", true);
-
-    $("#i_name").attr("readonly", true);
-    $("#i_price").attr("readonly", true);
-    $("#i_qty_on_hand").attr("readonly", true);
-
-    $("#o_id").attr("readonly", true);
-    $("#date").attr("readonly", true);
-
-    $("#balance").attr("readonly", true);
-
-}
+// function fieldsLock() {
+//     $("#c_name").attr("readonly", true);
+//     $("#c_address").attr("readonly", true);
+//     $("#c_salary").attr("readonly", true);
+//
+//     $("#i_name").attr("readonly", true);
+//     $("#i_price").attr("readonly", true);
+//     $("#i_qty_on_hand").attr("readonly", true);
+//
+//     $("#o_id").attr("readonly", true);
+//     $("#date").attr("readonly", true);
+//
+//     $("#balance").attr("readonly", true);
+//
+// }
 
 // set current date
 function currentDate() {
@@ -70,6 +67,7 @@ function generateOId() {
 
 // load order's items
 const loadOrderItems = () => {
+
     $("#o_table>tbody").empty();
 
     orderItems.map((item) => {
@@ -98,6 +96,10 @@ const loadOrderItems = () => {
 
 // load customers
 const loadCustomers = () => {
+    if (customer != null) {
+        return;
+    }
+
     $("#customer").empty();
     $("#customer").append(`<option value="" hidden selected>Select Customer</option>`);
     customers.map((customer) => {
@@ -113,6 +115,10 @@ const loadCustomers = () => {
 
 // load items
 const loadItems = () => {
+    if (customer != null) {
+        return;
+    }
+
     $("#item").empty();
     $("#item").append(`<option value="" hidden selected>Select Item</option>`);
     items.map((item) => {
@@ -256,10 +262,11 @@ $("#purchase_btn").on("click", () => {
 });
 
 export function init() {
-    fieldsLock();
+    // fieldsLock();
     currentDate();
     generateOId();
     loadItems();
+    loadOrderItems();
     loadCustomers();
 
     $("#total").text("Total : 0/=");

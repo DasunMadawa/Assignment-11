@@ -63,7 +63,7 @@
             <div class="col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
                 <div class="menu_card">
                     <i class="bi bi-people-fill menu_item_2"></i>
-                    <h4>Items</h4>
+                    <h4>Customers</h4>
                     <h4>1450</h4>
                     <h4>(+84)</h4>
                 </div>
@@ -72,7 +72,7 @@
             <div class="col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
                 <div class="menu_card">
                     <i class="bi bi-cart-plus menu_item_3"></i>
-                    <h4>Items</h4>
+                    <h4>Orders</h4>
                     <h4>1450</h4>
                     <h4>(+84)</h4>
                 </div>
@@ -81,7 +81,7 @@
             <div class="col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
                 <div class="menu_card">
                     <i class="bi bi-coin menu_item_4"></i>
-                    <h4>Items</h4>
+                    <h4>Sales</h4>
                     <h4>1450</h4>
                     <h4>(+84)</h4>
                 </div>
@@ -107,12 +107,12 @@
             </div>
             <div class="col col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 col-xxl-9">
                 <div class="input_card">
-                    <form class="needs-validation" novalidate>
+                    <form class="">
                         <div>
                             <div class="mb-3">
                                 <label for="c_c_id" class="form-label">Customer Id</label>
                                 <input type="text" class="form-control" id="c_c_id"
-                                       placeholder="">
+                                       placeholder="C001">
                             </div>
                             <div class="mb-3">
                                 <label for="c_c_name" class="form-label">Customer Name</label>
@@ -186,7 +186,7 @@
                             <div class="mb-3">
                                 <label for="i_i_code" class="form-label">Item Code</label>
                                 <input type="text" class="form-control" id="i_i_code"
-                                       placeholder="">
+                                       placeholder="I001">
                             </div>
                             <div class="mb-3">
                                 <label for="i_i_name" class="form-label">Item Name</label>
@@ -254,12 +254,12 @@
                             <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
                                 <label for="o_id" class="form-label">Order Id</label>
                                 <input type="text" class="form-control" id="o_id"
-                                       placeholder="">
+                                       placeholder="" readonly>
                             </div>
                             <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
                                 <label for="date" class="form-label">Date</label>
                                 <input type="date" class="form-control" id="date"
-                                       placeholder="">
+                                       placeholder="" readonly>
                             </div>
                         </div>
 
@@ -350,18 +350,19 @@
                 <div class="order_card">
                     <h4 id="total" class="col col-10">Total : 0/=</h4>
                     <h4 id="sub-total" class="col col-10">Sub Total : 0/=</h4>
-                    <div class="row">
-                        <div class="col col-5 col-sm-5 col-md-5 col-lg-8 col-xl-8 col-xxl-8 mb-3">
+                    <form class="row">
+                        <div class="col col-12 col-sm-5 col-md-5 col-lg-8 col-xl-8 col-xxl-8 mb-3">
                             <label for="cash" class="form-label">Cash</label>
                             <input type="text" class="form-control" id="cash"
                                    placeholder="">
                         </div>
-                        <div class="col col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4 col-xxl-4 mb-3">
+<!--                        is-invalid was-validated form-control:invalid-->
+                        <div class="col col-12 col-sm-2 col-md-2 col-lg-4 col-xl-4 col-xxl-4 mb-3">
                             <label for="discount" class="form-label">Discount</label>
                             <input type="text" class="form-control" id="discount"
                                    placeholder="  %">
                         </div>
-                        <div class="col col-5 col-sm-5 col-md-5 col-lg-12 col-xl-12 col-xxl-12 mb-3">
+                        <div class="col col-12 col-sm-5 col-md-5 col-lg-12 col-xl-12 col-xxl-12 mb-3">
                             <label for="balance" class="form-label">Balance</label>
                             <input type="text" class="form-control" id="balance"
                                    placeholder="">
@@ -370,7 +371,7 @@
                                 class="col col-4 col-sm4 col-md-4 col-lg-4 col-xl-4 col-xxl-4 btn btn-primary purchase_btn">
                             Purchase
                         </button>
-                    </div>
+                    </form>
 
                 </div>
             </div>

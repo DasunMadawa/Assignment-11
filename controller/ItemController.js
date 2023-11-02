@@ -3,9 +3,6 @@ import {ItemModel} from "../model/ItemModel.js";
 
 var row_index = -1;
 
-// items.push(new ItemModel("01" , "Shampoo" , 150 , 23));
-// items.push(new ItemModel("02" , "Fresh Milk" , 350 , 15));
-
 let codeInput = $("#i_i_code");
 let nameInput = $("#i_i_name");
 let priceInput = $("#i_i_price");
@@ -17,14 +14,14 @@ const clear = () => {
 }
 
 // load all data to table
-const loadAllTableData = () => {
-    $("#i_table>tbody").empty()
+export const loadAllTableItems = () => {
+    $("#i_table>tbody").empty();
     items.map((item) => {
         $("#i_table > tbody").append(`<tr><td>${item.code}</td><td>${item.name}</td><td>${item.price}</td><td>${item.qty}</td></tr>`);
     });
 };
 
-loadAllTableData();
+loadAllTableItems();
 
 // search
 $("#i_search_btn").on('click', () => {
@@ -52,7 +49,7 @@ $("#i_search_btn").on('click', () => {
 // save
 $("#i_save_btn").on('click', () => {
     items.push(new ItemModel(codeInput.val(), nameInput.val(), priceInput.val(), qtyInput.val()));
-    loadAllTableData();
+    loadAllTableItems();
     clear();
 });
 
@@ -64,7 +61,7 @@ $("#i_update_btn").on('click', () => {
     }
 
     items[row_index] = new ItemModel(codeInput.val(), nameInput.val(), priceInput.val(), qtyInput.val());
-    loadAllTableData();
+    loadAllTableItems();
     clear();
 
     row_index = -1;
@@ -78,7 +75,7 @@ $("#i_delete_btn").on('click', () => {
     }
 
     items.splice(row_index, 1);
-    loadAllTableData();
+    loadAllTableItems();
     clear();
     row_index = -1;
 
