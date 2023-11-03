@@ -2,8 +2,7 @@ import {customers, items} from "../db/DB.js";
 import {CustomerModel} from "../model/CustomerModel.js";
 
 const cId_reg = /^C\d{3}$/;
-const name_reg = /^[A-Za-z\s\-']{3,50}$/;
-;
+const name_reg = /^[A-Za-z\s\-']{3,50}$/;;
 const salary_reg = /^\d+(\.\d{2})?$/;
 
 
@@ -71,6 +70,7 @@ $(" #c_search_btn ").on('click', () => {
 
 // table select
 $(" #c_table ").on('click', 'tr ', function () {
+    clear();
     let selectedId = $(this).find("td:first-child").text();
     row_index = customers.findIndex(customer => customer.id === selectedId);
 
@@ -87,6 +87,9 @@ $("#c_save").on('click', () => {
         return;
     }
 
+    if (!checkDuplicates() ){
+        return;
+    }
 
     customers.push(new CustomerModel(idInput.val(), nameInput.val(), addressInput.val(), salaryInput.val()));
     loadAllTableCustomers();
@@ -111,17 +114,16 @@ $(" #c_update ").on('click', () => {
     }
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Are you sure to update this Customer?',
+        text: " ",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Update it!'
+        confirmButtonText: 'Yes, Update !'
     }).then((result) => {
         if (result.isConfirmed) {
-
-            customers.splice(row_index, 1);
+            customers[row_index] = new CustomerModel($("#c_c_id").val(), $("#c_c_name").val(), $("#c_c_address").val(), $("#c_c_salary").val());
             loadAllTableCustomers();
             clear();
             row_index = -1;
@@ -134,10 +136,6 @@ $(" #c_update ").on('click', () => {
         }
     });
 
-    customers[row_index] = new CustomerModel($("#c_c_id").val(), $("#c_c_name").val(), $("#c_c_address").val(), $("#c_c_salary").val());
-    loadAllTableCustomers();
-    clear();
-    row_index = -1;
 });
 
 // delete
@@ -152,13 +150,13 @@ $(" #c_delete ").on('click', () => {
     }
 
     Swal.fire({
-        title: 'Are you sure?',
+        title: 'Are you sure to delete this customer ?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes, delete !'
     }).then((result) => {
         if (result.isConfirmed) {
 
@@ -193,13 +191,26 @@ $(" #c_clear ").on('click', () => {
 
 });
 
+function checkDuplicates() {
+    let tempCustomer = customers.find(customer => customer.id == idInput.val());
+    if (tempCustomer) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Duplicate Customer Ids',
+            text: 'Fill Item Code Correctly !'
+        });
+        return false;
+    }
+    return true;
+
+}
+
 // validations
 let inputFields = [idInput, nameInput, addressInput, salaryInput , searchInput];
 let regList = [cId_reg, name_reg, name_reg, salary_reg , cId_reg];
 
 for (let i = 0; i < 5; i++) {
-    console.log(i);
-    inputFields[i].on('keyup', function () {
+    inputFields[i].on('input', function () {
         if (regList[i].test(inputFields[i].val())) {
             $(this).addClass("is-valid was-validated");
             $(this).removeClass("is-invalid was-validated form-control:invalid");

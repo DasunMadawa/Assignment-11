@@ -4,9 +4,6 @@ import {items} from "../db/DB.js";
 import {loadAllTableCustomers} from "../controller/CustomerController.js";
 import {loadAllTableItems} from "../controller/ItemController.js";
 
-items.push(new ItemModel("01" , "Shampoo" , 150 , 23));
-items.push(new ItemModel("02" , "Fresh Milk" , 350 , 15));
-
 let homePage = $(" body > div:nth-child(2) ");
 let customersPage = $(" body > div:nth-child(3) ");
 let itemsPage = $(" body > div:nth-child(4) ");
@@ -26,8 +23,8 @@ $("#home_page").on('click' , () => {
 
 $("#customers_page").on('click' , () => {
     clear();
+    loadAllTableCustomers()
     customersPage.css("display" , "block");
-
 });
 
 $("#items_page").on('click' , () => {
