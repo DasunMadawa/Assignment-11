@@ -3,7 +3,7 @@ import {OrderModel} from "../model/OrderModel.js";
 import {CustomerModel} from "../model/CustomerModel.js";
 import {ItemModel} from "../model/ItemModel.js";
 
-// let order_1 = new OrderModel("O001", "2023-10-10", 1560, new CustomerModel("C001", "Abc", "abc", 180000), []);
+// let order_1 = new OrderModel("O001", "2023-10-10", 1500, 1350 , 10 , new CustomerModel("C001", "Abc", "abc", 180000), []);
 // let order_2 = new OrderModel("O002", "2023-10-10", 1560, new CustomerModel("C001", "Abc", "abc", 180000), []);
 // let order_3 = new OrderModel("O003", "2023-10-10", 1560, new CustomerModel("C001", "Abc", "abc", 180000), []);
 //
@@ -15,7 +15,7 @@ let qtyInput = $("#i_qty");
 let cashInput = $("#cash");
 let discountInput = $("#discount");
 
-let discount_reg = /^(0|[1-9]\d?|100)$/;
+const discount_reg = /^(0|[1-9]\d?|100)$/;
 const price_reg = /^\d+(\.\d{2})$/;
 const qty_reg = /^[0-9]\d*$/;
 
@@ -221,6 +221,7 @@ function calcTotal() {
     orderItems.map(orderItem => {
         total += (orderItem.qty * orderItem.price);
     });
+    total = total.toFixed(2);
 
     $("#total").text("Total : " + total + "/=");
     calcDiscount(total);
@@ -233,6 +234,7 @@ function calcDiscount(total) {
     if (discount != null) {
         subTotal -= ((subTotal * discount) / 100.0);
     }
+    subTotal = subTotal.toFixed(2);
 
     $("#sub-total").text("Sub Total : " + subTotal + "/=");
 
@@ -291,7 +293,7 @@ $("#purchase_btn").on("click", () => {
         total,
         subTotal,
         discountInput.val(),
-        new CustomerModel(customer.code, customer.name, customer.address, customer.salary),
+        new CustomerModel(customer.id, customer.name, customer.address, customer.salary),
         orderItems
     );
 
@@ -301,11 +303,14 @@ $("#purchase_btn").on("click", () => {
     customer = null;
     item = null;
 
+    Swal.fire('Saved!', '', 'success');
 
     loadOrderItems();
     clearAll();
+
     cashInput.val("");
     discountInput.val("");
+    $("#balance").val("");
     $("#total").text("Total : 0/=");
     $("#sub-total").text("Sub Total : 0/=");
 

@@ -41,6 +41,9 @@
                 <li class="nav-item nav_items">
                     <a id="orders_page" class="nav-link nav_items" href="#">Orders</a>
                 </li>
+                <li class="nav-item nav_items">
+                    <a id="orders_history_page" class="nav-link nav_items" href="#">Order-History</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -55,8 +58,8 @@
                 <div class="menu_card">
                     <i class="bi bi-box-seam menu_item_1"></i>
                     <h4>Items</h4>
-                    <h4>1450</h4>
-                    <h4>(+84)</h4>
+                    <h4 id="items_home">1450</h4>
+                    <h4>(0)</h4>
                 </div>
             </div>
 
@@ -64,8 +67,8 @@
                 <div class="menu_card">
                     <i class="bi bi-people-fill menu_item_2"></i>
                     <h4>Customers</h4>
-                    <h4>1450</h4>
-                    <h4>(+84)</h4>
+                    <h4 id="customers_home">1450</h4>
+                    <h4>(0)</h4>
                 </div>
             </div>
 
@@ -73,8 +76,8 @@
                 <div class="menu_card">
                     <i class="bi bi-cart-plus menu_item_3"></i>
                     <h4>Orders</h4>
-                    <h4>1450</h4>
-                    <h4>(+84)</h4>
+                    <h4 id="orders_home">1450</h4>
+                    <h4>(0)</h4>
                 </div>
             </div>
 
@@ -82,8 +85,8 @@
                 <div class="menu_card">
                     <i class="bi bi-coin menu_item_4"></i>
                     <h4>Sales</h4>
-                    <h4>1450</h4>
-                    <h4>(+84)</h4>
+                    <h4 id="sales_home">1450</h4>
+                    <h4>(Rs.)</h4>
                 </div>
             </div>
 
@@ -356,7 +359,7 @@
                             <input type="text" class="form-control" id="cash"
                                    placeholder="Rs.">
                         </div>
-<!--                        is-invalid was-validated form-control:invalid-->
+                        <!--                        is-invalid was-validated form-control:invalid-->
                         <div class="col col-12 col-sm-2 col-md-2 col-lg-4 col-xl-4 col-xxl-4 mb-3">
                             <label for="discount" class="form-label">Discount</label>
                             <input type="text" class="form-control" id="discount"
@@ -392,22 +395,187 @@
                     </thead>
 
                     <tbody>
-<!--                    <tr>-->
-<!--                        <td>01</td>-->
-<!--                        <td>Shampoo</td>-->
-<!--                        <td>150</td>-->
-<!--                        <td>23</td>-->
-<!--                        <td>-->
-<!--                            <div class="container">-->
-<!--                                <div style="justify-content: center" class="row">-->
-<!--                                    <button type="button"-->
-<!--                                            class="col col-12 col-sm12 col-md-8 col-lg-8 col-xl-4 col-xxl-4 btn btn-danger remove-t-btn">-->
-<!--                                        Remove-->
-<!--                                    </button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </td>-->
-<!--                    </tr>-->
+                    <!--                    <tr>-->
+                    <!--                        <td>01</td>-->
+                    <!--                        <td>Shampoo</td>-->
+                    <!--                        <td>150</td>-->
+                    <!--                        <td>23</td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="container">-->
+                    <!--                                <div style="justify-content: center" class="row">-->
+                    <!--                                    <button type="button"-->
+                    <!--                                            class="col col-12 col-sm12 col-md-8 col-lg-8 col-xl-4 col-xxl-4 btn btn-danger remove-t-btn">-->
+                    <!--                                        Remove-->
+                    <!--                                    </button>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                    </tr>-->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--order history-->
+<div class="background">
+    <div class="container">
+        <div class="row">
+
+            <div class="col col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-4">
+
+                <!--                order   -->
+                <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                    <div class="order_card">
+                        <h4>Order</h4>
+                        <div class="row">
+                            <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
+                                <label for="o_id_history" class="form-label">Order Id</label>
+                                <input type="text" class="form-control" id="o_id_history"
+                                       placeholder="O001">
+                            </div>
+                            <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
+                                <label for="date_history" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="date_history"
+                                       placeholder="" disabled>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <button id="o_search_btn_history" type="button"
+                                    class="col col-4 col-sm4 col-md-4 col-lg-4 col-xl-4 col-xxl-6 btn btn-primary add_item_btn">
+                                Search
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--                customer    -->
+                <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                    <div class="customer_card">
+                        <h4>Customer</h4>
+                        <div class="row">
+                            <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
+                                <label for="c_id_history">Customer Id</label>
+                                <input type="text" class="form-control" id="c_id_history"
+                                       placeholder="" disabled>
+                            </div>
+                            <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
+                                <label for="c_name_history" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="c_name_history"
+                                       placeholder="" disabled>
+                            </div>
+                            <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
+                                <label for="c_address_history" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="c_address_history"
+                                       placeholder="" disabled>
+                            </div>
+                            <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">
+                                <label for="c_salary_history" class="form-label">salary</label>
+                                <input type="text" class="form-control" id="c_salary_history"
+                                       placeholder="" disabled>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!--            item    -->
+<!--            <div class="col col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 col-xxl-4">-->
+<!--                <div class="item_card">-->
+<!--                    <h4>Item</h4>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">-->
+<!--                            <label for="item_code_history">Item Code</label>-->
+<!--                            <input type="text" class="form-control" id="item_code_history"-->
+<!--                                   placeholder="" disabled>-->
+<!--                        </div>-->
+<!--                        <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">-->
+<!--                            <label for="i_name_history" class="form-label">Name</label>-->
+<!--                            <input type="text" class="form-control" id="i_name_history"-->
+<!--                                   placeholder="" disabled>-->
+<!--                        </div>-->
+<!--                        <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">-->
+<!--                            <label for="i_price_history" class="form-label">Price</label>-->
+<!--                            <input type="text" class="form-control" id="i_price_history"-->
+<!--                                   placeholder="" disabled>-->
+<!--                        </div>-->
+<!--                        <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">-->
+<!--                            <label for="i_qty_on_hand_history" class="form-label">Qty On Hand</label>-->
+<!--                            <input type="text" class="form-control" id="i_qty_on_hand_history"-->
+<!--                                   placeholder="" disabled>-->
+<!--                        </div>-->
+<!--                        <div class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6 mb-3">-->
+<!--                            <label for="i_qty_history" class="form-label">Qty</label>-->
+<!--                            <input type="text" class="form-control" id="i_qty_history"-->
+<!--                                   placeholder="" disabled>-->
+<!--                        </div>-->
+
+<!--&lt;!&ndash;                        <button id="o-add-item-btn_history" type="button"&ndash;&gt;-->
+<!--&lt;!&ndash;                                class="col col-4 col-sm4 col-md-4 col-lg-4 col-xl-4 col-xxl-6 btn btn-primary add_item_btn">&ndash;&gt;-->
+<!--&lt;!&ndash;                            Add new&ndash;&gt;-->
+<!--&lt;!&ndash;                        </button>&ndash;&gt;-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+
+            <!--            total   -->
+            <div class="col col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
+                <div class="order_card">
+                    <h4 id="total_history" class="col col-10">Total : 0/=</h4>
+                    <h4 id="sub-total_history" class="col col-10">Sub Total : 0/=</h4>
+                    <form class="row">
+                        <div class="col col-12 col-sm-8 col-md-8 col-lg-4 col-xl-4 col-xxl-4 mb-4">
+                            <label for="discount_history" class="form-label">Discount</label>
+                            <input type="text" class="form-control" id="discount_history"
+                                   placeholder="  %" disabled>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!--        table   -->
+        <div class="row">
+
+            <div class="col table_card">
+                <table id="o_table_history" class="table table-bordered">
+                    <thead>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    </thead>
+
+                    <tbody>
+                    <!--                    <tr>-->
+                    <!--                        <td>01</td>-->
+                    <!--                        <td>Shampoo</td>-->
+                    <!--                        <td>150</td>-->
+                    <!--                        <td>23</td>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="container">-->
+                    <!--                                <div style="justify-content: center" class="row">-->
+                    <!--                                    <button type="button"-->
+                    <!--                                            class="col col-12 col-sm12 col-md-8 col-lg-8 col-xl-4 col-xxl-4 btn btn-danger remove-t-btn">-->
+                    <!--                                        Remove-->
+                    <!--                                    </button>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </td>-->
+                    <!--                    </tr>-->
 
                     </tbody>
 
@@ -427,6 +595,7 @@
 <script src="controller/CustomerController.js" type="module"></script>
 <script src="controller/ItemController.js" type="module"></script>
 <script src="controller/OrderController.js" type="module"></script>
+<script src="controller/OrderHistoryController.js" type="module"></script>
 
 
 </body>
