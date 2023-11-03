@@ -224,7 +224,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 function checkFields() {
-    if (!idInput || !cId_reg.test(idInput.val())) {
+    if (!cId_reg.test(idInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',
@@ -234,7 +234,7 @@ function checkFields() {
         return false;
     }
 
-    if (!nameInput || !name_reg.test(nameInput.val())) {
+    if (!name_reg.test(nameInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',
@@ -244,7 +244,7 @@ function checkFields() {
         return false;
     }
 
-    if (!addressInput || !name_reg.test(addressInput.val())) {
+    if (!name_reg.test(addressInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',
@@ -254,7 +254,7 @@ function checkFields() {
         return false;
     }
 
-    if (!salaryInput || !salary_reg.test(salaryInput.val())) {
+    if (!salary_reg.test(salaryInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',

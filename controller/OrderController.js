@@ -16,7 +16,7 @@ let cashInput = $("#cash");
 let discountInput = $("#discount");
 
 let discount_reg = /^(0|[1-9]\d?|100)$/;
-const price_reg = /^\d+(\.\d{2})?$/;
+const price_reg = /^\d+(\.\d{2})$/;
 const qty_reg = /^[0-9]\d*$/;
 
 
@@ -163,7 +163,17 @@ function loadItem() {
 
 // add item
 $("#o-add-item-btn").on("click", () => {
-    if (!qtyInput || !qty_reg.test(qtyInput.val())) {
+    if (item == null) {
+        Swal.fire({
+            icon: 'question',
+            title: 'Cant Find Item',
+            text: 'Select Item First!'
+        });
+        qtyInput.addClass("is-invalid was-validated form-control:invalid");
+        return;
+    }
+
+    if (!qty_reg.test(qtyInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',
@@ -214,7 +224,6 @@ function calcTotal() {
 
     $("#total").text("Total : " + total + "/=");
     calcDiscount(total);
-    console.log(total);
 
 }
 
@@ -231,7 +240,7 @@ function calcDiscount(total) {
 
 function calcBalance() {
     let cash = cashInput.val();
-    $("#balance").val(cash - subTotal);
+    $("#balance").val((cash - subTotal).toFixed(2));
 }
 
 discountInput.on("input", () => {
@@ -263,6 +272,19 @@ $("#o_table").on("click", "button", function () {
 
 // do purchase
 $("#purchase_btn").on("click", () => {
+    if (!checkFields()) {
+        return;
+    }
+
+    if ($("#balance").val() < 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Insufficient Money!',
+            text: 'Low balance!'
+        });
+        return;
+    }
+
     let order = new OrderModel(
         $("#o_id").val(),
         $("#date").val(),
@@ -278,8 +300,16 @@ $("#purchase_btn").on("click", () => {
     orderItems = [];
     customer = null;
     item = null;
-    $("#orders_page").click();
+
+
     loadOrderItems();
+    clearAll();
+    cashInput.val("");
+    discountInput.val("");
+    $("#total").text("Total : 0/=");
+    $("#sub-total").text("Sub Total : 0/=");
+
+    $("#orders_page").click();
 
 });
 
@@ -291,12 +321,12 @@ export function init() {
     loadOrderItems();
     loadCustomers();
 
-    $("#total").text("Total : 0/=");
-    $("#sub-total").text("Sub Total : 0/=");
-    cashInput.val("");
-    total = 0;
-    subTotal = 0;
-    calcBalance();
+    // $("#total").text("Total : 0/=");
+    // $("#sub-total").text("Sub Total : 0/=");
+    // cashInput.val("");
+    // total = 0;
+    // subTotal = 0;
+    // calcBalance();
 }
 
 // validations
@@ -318,21 +348,38 @@ for (let i = 0; i < 3; i++) {
 }
 
 function checkFields() {
-    if (!cashInput || !price_reg.test(cashInput.val())) {
+    if (customer == null) {
+        Swal.fire({
+            icon: 'question',
+            title: 'Cant Find Customer!',
+            text: 'Select Customer First!'
+        });
+        return false;
+    }
+    if (orderItems.length == 0) {
+        Swal.fire({
+            icon: 'question',
+            title: 'No Order Items!',
+            text: 'Add Some Items!'
+        });
+        return false;
+    }
+
+    if (!price_reg.test(cashInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',
-            text: 'Fill Item Name Correctly !'
+            text: 'Fill Cash Amount Correctly !'
         });
         cashInput.addClass("is-invalid was-validated form-control:invalid");
         return false;
     }
 
-    if (!discountInput || !discount_reg.test(discountInput.val())) {
+    if (!discount_reg.test(discountInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',
-            text: 'Fill Item Price Correctly !'
+            text: 'Fill Discount Correctly!'
         });
         discountInput.addClass("is-invalid was-validated form-control:invalid");
         return false;

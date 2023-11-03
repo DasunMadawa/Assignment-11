@@ -3,7 +3,7 @@ import {ItemModel} from "../model/ItemModel.js";
 
 const i_code_reg = /^I\d{3}$/;
 const name_reg = /^[A-Za-z\s\-']{3,50}$/;
-const price_reg = /^\d+(\.\d{2})?$/;
+const price_reg = /^\d+(\.\d{2})$/;
 const qty_reg = /^[0-9]\d*$/;
 
 items.push(new ItemModel("I001", "Shampoo", 150, 23));
@@ -202,7 +202,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 function checkFields() {
-    if (!codeInput || !i_code_reg.test(codeInput.val())) {
+    if (!i_code_reg.test(codeInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',
@@ -212,7 +212,7 @@ function checkFields() {
         return false;
     }
 
-    if (!nameInput || !name_reg.test(nameInput.val())) {
+    if (!name_reg.test(nameInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',
@@ -222,7 +222,7 @@ function checkFields() {
         return false;
     }
 
-    if (!priceInput || !price_reg.test(priceInput.val())) {
+    if (!price_reg.test(priceInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',
@@ -232,7 +232,7 @@ function checkFields() {
         return false;
     }
 
-    if (!qtyInput || !qty_reg.test(qtyInput.val())) {
+    if (!qty_reg.test(qtyInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',
