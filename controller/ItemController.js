@@ -6,8 +6,8 @@ const name_reg = /^[A-Za-z\s\-']{3,50}$/;
 const price_reg = /^\d+(\.\d{2})$/;
 const qty_reg = /^[0-9]\d*$/;
 
-items.push(new ItemModel("I001", "Shampoo", 150, 23));
-items.push(new ItemModel("I002", "Fresh Milk", 350, 15));
+// items.push(new ItemModel("I001", "Shampoo", 150, 23));
+// items.push(new ItemModel("I002", "Fresh Milk", 350, 15));
 
 
 var row_index = -1;
@@ -35,6 +35,15 @@ loadAllTableItems();
 
 // search
 $("#i_search_btn").on('click', () => {
+    if (!i_code_reg.test(searchInput.val())) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Fill Item Code Correctly !'
+        });
+        return;
+    }
+
     try {
         let item = items.find(item => item.code == $("#item_search").val());
         if (item == null) {
@@ -50,7 +59,12 @@ $("#i_search_btn").on('click', () => {
 
     } catch (e) {
         clear();
-        alert("Can't find item , sorry !");
+        Swal.fire({
+            icon: 'info',
+            title: 'Cant Find Item',
+            text: 'Check Another ID !'
+        });
+
 
     }
 

@@ -8,10 +8,10 @@ const salary_reg = /^\d+(\.\d{2})?$/;
 
 var row_index = -1;
 
-customers.push(new CustomerModel("C001", "Dasun Madawa", "Horana", 150000));
-customers.push(new CustomerModel("C002", "Dasun Madawa", "Horana", 150000));
-customers.push(new CustomerModel("C003", "Dasun Madawa", "Horana", 150000));
-customers.push(new CustomerModel("C004", "Dasun Madawa", "Horana", 150000));
+// customers.push(new CustomerModel("C001", "Dasun Madawa", "Horana", 150000));
+// customers.push(new CustomerModel("C002", "Dasun Madawa", "Horana", 150000));
+// customers.push(new CustomerModel("C003", "Dasun Madawa", "Horana", 150000));
+// customers.push(new CustomerModel("C004", "Dasun Madawa", "Horana", 150000));
 
 let searchInput = $(" #c_customer_search ");
 let idInput = $(" #c_c_id ");
@@ -38,7 +38,7 @@ const clear = () => {
 
 // search
 $(" #c_search_btn ").on('click', () => {
-    if (!searchInput || !cId_reg.test(searchInput.val())) {
+    if (!cId_reg.test(searchInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',
@@ -62,7 +62,11 @@ $(" #c_search_btn ").on('click', () => {
         row_index = customers.findIndex(c => c.id === customer.id);
     } catch (e) {
         clear();
-        alert("Can't Find Customer , Sorry !");
+        Swal.fire({
+            icon: 'info',
+            title: 'Cant Find Customer',
+            text: 'Check Another ID !'
+        });
 
     }
 
