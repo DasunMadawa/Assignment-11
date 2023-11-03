@@ -3,9 +3,8 @@ import {ItemModel} from "../model/ItemModel.js";
 
 const i_code_reg = /^I\d{3}$/;
 const name_reg = /^[A-Za-z\s\-']{3,50}$/;
-;
-const salary_reg = /^\d+(\.\d{2})?$/;
-const qty_reg = /\b[0-9]\d{0,2}\b/;
+const price_reg = /^\d+(\.\d{2})?$/;
+const qty_reg = /^[0-9]\d*$/;
 
 items.push(new ItemModel("I001", "Shampoo", 150, 23));
 items.push(new ItemModel("I002", "Fresh Milk", 350, 15));
@@ -186,7 +185,7 @@ function checkDuplicates() {
 
 // validations
 let inputFields = [codeInput, nameInput, priceInput, qtyInput, searchInput];
-let regList = [i_code_reg, name_reg, salary_reg, qty_reg, i_code_reg];
+let regList = [i_code_reg, name_reg, price_reg, qty_reg, i_code_reg];
 
 for (let i = 0; i < 5; i++) {
     inputFields[i].on('keyup', function () {
@@ -223,7 +222,7 @@ function checkFields() {
         return false;
     }
 
-    if (!priceInput || !salary_reg.test(priceInput.val())) {
+    if (!priceInput || !price_reg.test(priceInput.val())) {
         Swal.fire({
             icon: 'error',
             title: 'Invalid Input',

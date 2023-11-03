@@ -1,4 +1,4 @@
-import {items , customers , orders } from "../db/DB.js";
+import {items, customers, orders} from "../db/DB.js";
 import {OrderModel} from "../model/OrderModel.js";
 import {CustomerModel} from "../model/CustomerModel.js";
 import {ItemModel} from "../model/ItemModel.js";
@@ -10,6 +10,15 @@ import {ItemModel} from "../model/ItemModel.js";
 // orders.push(order_1);
 // orders.push(order_2);
 // orders.push(order_3);
+
+let qtyInput = $("#i_qty");
+let cashInput = $("#cash");
+let discountInput = $("#discount");
+
+let discount_reg = /^(0|[1-9]\d?|100)$/;
+const price_reg = /^\d+(\.\d{2})?$/;
+const qty_reg = /^[0-9]\d*$/;
+
 
 // let rowIndex = -1;
 let customer = null;
@@ -96,39 +105,36 @@ const loadOrderItems = () => {
 
 // load customers
 const loadCustomers = () => {
-    if (customer != null) {
-        return;
-    }
-
     $("#customer").empty();
-    $("#customer").append(`<option value="" hidden selected>Select Customer</option>`);
+
     customers.map((customer) => {
         $("#customer").append(`<option value="${customer.id}">${customer.id}</option>`);
     });
 
-    customer = null;
-    $("#c_name").val("");
-    $("#c_address").val("");
-    $("#c_salary").val("");
+    if (customer == null) {
+        $("#customer").append(`<option value="" hidden selected>Select Customer</option>`);
+        $("#c_name").val("");
+        $("#c_address").val("");
+        $("#c_salary").val("");
+
+    }
 
 };
 
 // load items
 const loadItems = () => {
-    if (customer != null) {
-        return;
-    }
-
     $("#item").empty();
-    $("#item").append(`<option value="" hidden selected>Select Item</option>`);
+
     items.map((item) => {
         $("#item").append(`<option value="${item.code}">${item.code}</option>`);
     });
 
-    item = null;
-    $("#i_name").val("");
-    $("#i_price").val("");
-    $("#i_qty_on_hand").val("");
+    if (item == null) {
+        $("#item").append(`<option value="" hidden selected>Select Item</option>`)
+        $("#i_name").val("");
+        $("#i_price").val("");
+        $("#i_qty_on_hand").val("");
+    }
 
 };
 
@@ -151,12 +157,23 @@ function loadItem() {
     $("#i_name").val(item.name);
     $("#i_price").val(item.price);
     $("#i_qty_on_hand").val(item.qty);
-    $("#i_qty").val("");
+    qtyInput.val("");
 
 }
 
+// add item
 $("#o-add-item-btn").on("click", () => {
-    let qty = Number.parseInt($("#i_qty").val());
+    if (!qtyInput || !qty_reg.test(qtyInput.val())) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Fill Item Qty Correctly!'
+        });
+        qtyInput.addClass("is-invalid was-validated form-control:invalid");
+        return;
+    }
+
+    let qty = Number.parseInt(qtyInput.val());
 
     if ((item.qty - qty) < 0) {
         alert("insufficient space");
@@ -180,6 +197,8 @@ $("#o-add-item-btn").on("click", () => {
     loadOrderItems();
     calcTotal();
     calcBalance();
+    clearItem();
+
 });
 
 function findOrderItem(code) {
@@ -200,7 +219,7 @@ function calcTotal() {
 }
 
 function calcDiscount(total) {
-    let discount = $("#discount").val();
+    let discount = discountInput.val();
     subTotal = total;
     if (discount != null) {
         subTotal -= ((subTotal * discount) / 100.0);
@@ -211,17 +230,17 @@ function calcDiscount(total) {
 }
 
 function calcBalance() {
-    let cash = $("#cash").val();
+    let cash = cashInput.val();
     $("#balance").val(cash - subTotal);
 }
 
-$("#discount").on("input", () => {
+discountInput.on("input", () => {
     calcDiscount(total);
     calcBalance();
 
 });
 
-$("#cash").on("input", function () {
+cashInput.on("input", function () {
     calcBalance();
 });
 
@@ -245,20 +264,23 @@ $("#o_table").on("click", "button", function () {
 // do purchase
 $("#purchase_btn").on("click", () => {
     let order = new OrderModel(
-        $("#o_id").val() ,
-        $("#date").val() ,
-        total ,
-        subTotal ,
-        $("#discount").val(),
-        new CustomerModel(customer.code, customer.name , customer.address , customer.salary),
+        $("#o_id").val(),
+        $("#date").val(),
+        total,
+        subTotal,
+        discountInput.val(),
+        new CustomerModel(customer.code, customer.name, customer.address, customer.salary),
         orderItems
     );
 
     orders.push(order);
 
     orderItems = [];
+    customer = null;
+    item = null;
     $("#orders_page").click();
     loadOrderItems();
+
 });
 
 export function init() {
@@ -271,12 +293,71 @@ export function init() {
 
     $("#total").text("Total : 0/=");
     $("#sub-total").text("Sub Total : 0/=");
-    $("#cash").val("");
+    cashInput.val("");
     total = 0;
     subTotal = 0;
     calcBalance();
 }
 
+// validations
+let inputFields = [qtyInput, cashInput, discountInput];
+let regList = [qty_reg, price_reg, discount_reg];
+
+for (let i = 0; i < 3; i++) {
+    inputFields[i].on('keyup', function () {
+        if (regList[i].test(inputFields[i].val())) {
+            $(this).addClass("is-valid was-validated");
+            $(this).removeClass("is-invalid was-validated form-control:invalid");
+        } else {
+            $(this).addClass("is-invalid was-validated form-control:invalid");
+            $(this).removeClass("is-valid was-validated form-control:valid");
+
+        }
+
+    });
+}
+
+function checkFields() {
+    if (!cashInput || !price_reg.test(cashInput.val())) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Fill Item Name Correctly !'
+        });
+        cashInput.addClass("is-invalid was-validated form-control:invalid");
+        return false;
+    }
+
+    if (!discountInput || !discount_reg.test(discountInput.val())) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Fill Item Price Correctly !'
+        });
+        discountInput.addClass("is-invalid was-validated form-control:invalid");
+        return false;
+    }
+    return true;
+
+}
+
+// clear
+function clearItem() {
+    qtyInput.removeClass("is-valid was-validated form-control:valid");
+    qtyInput.removeClass("is-invalid was-validated form-control:invalid");
+
+};
+
+function clearAll() {
+    clearItem();
+
+    cashInput.removeClass("is-valid was-validated form-control:valid");
+    cashInput.removeClass("is-invalid was-validated form-control:invalid");
+
+    discountInput.removeClass("is-valid was-validated form-control:valid");
+    discountInput.removeClass("is-invalid was-validated form-control:invalid");
+
+};
 
 
 
